@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ed Franks Portfolio</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #2e2e2e;
+            color: white;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background-color: #8e0038; /* Red color */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 2;
+        }
+        .header .nav-links {
+            margin-right: 20px;
+        }
+        .header .nav-links a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+        }
+        .sidebar {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            width: 200px; /* Adjust width as needed */
+            height: calc(100% - 60px);
+            background-color: #6a0dad; /* Purple color */
+            padding-top: 20px;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .sidebar .title {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        .sidebar .social-links {
+            margin-top: auto;
+            padding-bottom: 20px;
+        }
+        .sidebar .social-links a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            text-decoration: none;
+        }
+        .content {
+            display: flex;
+            margin-left: 220px; /* Adjust to match sidebar width */
+            padding-top: 80px;
+            width: calc(100% - 320px); /* Adjust width to leave space for yellow sidebar */
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+        .nav-dots {
+            position: fixed;
+            right: 0;
+            top: 60px;
+            bottom: 0;
+            width: 100px;
+            background-color: #ffc107; /* Yellow color */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 0;
+        }
+        .nav-dots a {
+            display: block;
+            background-color: #fff;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin: 10px 0;
+            text-indent: -9999px;
+        }
+        .nav-dots a:hover {
+            background-color: #000;
+        }
+        .section {
+            height: 100vh;
+            padding: 20px;
+        }
+        #section1 {
+            background-color: #00ff00; /* Green color */
+        }
+        #section2 {
+            background-color: #ff00ff; /* Magenta color */
+        }
+        #section3 {
+            background-color: #00ffff; /* Cyan color */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <a href="#"><img src="logo.png" alt="Logo"></a>
+        </div>
+        <div class="nav-links">
+            <a href="#">about</a>
+            <a href="#">contact</a>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <div class="title">designer / developer</div>
+        <div class="social-links">
+            <a href="#">email</a>
+            <a href="#">Be</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="main-content">
+            <div class="section" id="section1">
+                <h2>Ed Franks</h2>
+                <p>A designer/front-end developer with a passion for web design, based in Bristol, UK</p>
+                <button class="btn btn-primary">View Work</button>
+            </div>
+            <div class="section" id="section2">
+                <h2>Ed Franks 2</h2>
+                <p>More details about Ed Franks' work.</p>
+                <button class="btn btn-primary">View More</button>
+            </div>
+            <div class="section" id="section3">
+                <h2>Ed Franks 3</h2>
+                <p>Even more details about Ed Franks' work.</p>
+                <button class="btn btn-primary">Explore More</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-dots">
+        <a href="#section1" onclick="scrollToSection(1)">1</a>
+        <a href="#section2" onclick="scrollToSection(2)">2</a>
+        <a href="#section3" onclick="scrollToSection(3)">3</a>
+    </div>
+
+    <script>
+        function scrollToSection(sectionNumber) {
+            document.getElementById('section' + sectionNumber).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        window.addEventListener('scroll', function() {
+            var sections = document.querySelectorAll('.section');
+            var scrollPosition = document.documentElement.scrollTop || document.body.scrollTop;
+
+            sections.forEach(function(section) {
+                if (section.offsetTop <= scrollPosition + window.innerHeight / 2 && 
+                    section.offsetTop + section.offsetHeight > scrollPosition + window.innerHeight / 2) {
+                    document.querySelectorAll('.nav-dots a').forEach(function(dot) {
+                        dot.style.backgroundColor = '#fff';
+                    });
+                    document.querySelector('.nav-dots a[href="#' + section.id + '"]').style.backgroundColor = '#000';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
